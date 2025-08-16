@@ -1,0 +1,33 @@
+# ==== Системный мусор ====
+.DS_Store
+Thumbs.db
+
+# ==== IDE / редакторы ====
+.vscode/
+.idea/
+.atom/
+
+# ==== Node / JS / TS ====
+node_modules/
+dist/
+build/
+.cache/
+.next/
+.out/
+
+# ==== Python ====
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+
+# ==== Прочее ====
+tmp/
+.tmp/
+logs/
+*.log
+
+# ==== Git ====
+# Исключаем сам репозиторий Git, чтобы Syncthing не путался в служебных файлах
+.git/
