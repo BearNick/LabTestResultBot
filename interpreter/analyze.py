@@ -48,7 +48,9 @@ def build_prompt(lab_data: dict) -> str:
             "7. Provide **specific recommendations** for diet, supplements, or vitamins, with brief justification.\n"
             "8. Suggest which tests should be repeated or added.\n"
             "9. Be concise: no more than 6–7 paragraphs. Avoid generic advice or vague language.\n"
-            "10. Don't repeat normal values — focus only on deviations and important relationships.\n\n"
+            "10. Don't repeat normal values — focus only on deviations and important relationships.\n"
+            "11. If the lab results include antibody values (IgA, IgG, IgM, anti-TPO, anti-TG, ANA, etc.), evaluate their level, explain possible reasons for elevation or reduction, and provide recommendations (e.g., investigate autoimmune conditions, chronic infections, or allergies).\n"
+            "12. If antibodies are within the normal range, do not mention them to avoid overloading the interpretation.\n\n"
             "📊 Lab results provided by the patient:\n"
         )
 
@@ -68,7 +70,9 @@ def build_prompt(lab_data: dict) -> str:
             "7. Proporciona **recomendaciones específicas** sobre dieta, vitaminas o suplementos, con una breve justificación.\n"
             "8. Indica qué análisis se deben repetir o agregar.\n"
             "9. Sé conciso: no más de 6–7 párrafos. Evita frases genéricas o consejos vagos.\n"
-            "10. No repitas valores normales: céntrate en las desviaciones y relaciones clave.\n\n"
+            "10. No repitas valores normales: céntrate en las desviaciones y relaciones clave.\n"
+            "11. Si los resultados incluyen valores de anticuerpos (IgA, IgG, IgM, anti-TPO, anti-TG, ANA, etc.), evalúa su nivel, indica posibles causas de elevación o disminución y ofrece recomendaciones (por ejemplo, investigar procesos autoinmunes, infecciones crónicas o alergias).\n"
+            "12. Si los anticuerpos están dentro del rango normal, no los menciones para no sobrecargar la interpretación.\n\n"
             "📊 Resultados proporcionados por el paciente:\n"
         )
 
@@ -88,7 +92,9 @@ def build_prompt(lab_data: dict) -> str:
             "7. Дай **конкретные рекомендации** по питанию, витаминам и БАДам с кратким обоснованием.\n"
             "8. Укажи, **какие анализы стоит пересдать или дополнительно сдать**.\n"
             "9. Будь краток: не больше 6–7 абзацев. Не пиши шаблонные советы. Не используй фразы типа 'дай знать' или 'обратись ко мне'.\n"
-            "10. Не повторяй нормальные показатели, только отклонения и значимые взаимосвязи.\n\n"
+            "10. Не повторяй нормальные показатели, только отклонения и значимые взаимосвязи.\n"
+            "11. Если среди анализов есть показатели антител (IgA, IgG, IgM, anti-TPO, anti-TG, ANA и т.п.), оцени их уровень, укажи возможные причины повышения или снижения, и дай рекомендации (например, проверить аутоиммунные процессы, хронические инфекции или аллергии).\n"
+            "12. Если антитела в норме, не упоминай их, чтобы не перегружать вывод.\n\n"
             "📊 Вот значения, которые прислал пациент:\n"
         )
 
