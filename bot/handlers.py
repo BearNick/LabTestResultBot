@@ -150,11 +150,21 @@ async def ask_gender(message: Message, state: FSMContext):
     await state.set_state(Form.waiting_for_file)
 
 
-# Обработка PDF-файла
+# Обработка PDF-файла — ОГРАНИЧЕНИЕ: 1 файл на сессию
 async def handle_pdf(message: Message, state: FSMContext):
     document: Document | None = message.document
     data = await state.get_data()
     lang = data.get("language", "ru")
+
+    # 🔒 Блок повторной загрузки в одной сессии
+    if data.get("file_uploaded"):
+        msgs = {
+            "ru": "⚠️ В этой сессии уже обработан 1 файл.\nЧтобы загрузить новый — начни заново командой /start.",
+            "en": "⚠️ One file has already been processed in this session.\nTo upload another, please restart with /start.",
+            "es": "⚠️ Ya se procesó 1 archivo en esta sesión.\nPara enviar otro, reinicia con /start.",
+        }
+        await message.answer(msgs[lang])
+        return
 
     if not document or not document.file_name.lower().endswith(".pdf"):
         errs = {
@@ -172,6 +182,9 @@ async def handle_pdf(message: Message, state: FSMContext):
     file_path = upload_dir / safe_name
 
     try:
+        # Сразу ставим флаг, чтобы параллельные/дублирующие попытки в этой сессии блокировались
+        await state.update_data(file_uploaded=True)
+
         # 1) Скачиваем PDF
         file_info = await message.bot.get_file(document.file_id)
         await message.bot.download_file(file_info.file_path, destination=str(file_path))
@@ -196,6 +209,13 @@ async def handle_pdf(message: Message, state: FSMContext):
                 "es": "⚠️ No se pudieron extraer datos del PDF. Intenta con un escaneo más claro/original.",
             }
             await message.answer(errs[lang])
+            # Разрешим повтор через /start — явно подскажем
+            hint = {
+                "ru": "Чтобы попробовать снова, начни заново командой /start.",
+                "en": "To try again, please restart with /start.",
+                "es": "Para intentarlo de nuevo, reinicia con /start.",
+            }
+            await message.answer(hint[lang])
             await state.clear()
             return
 
@@ -253,6 +273,14 @@ async def handle_pdf(message: Message, state: FSMContext):
         # Можно сохранить контекст
         await state.update_data(last_lab_data=lab_data)
 
+        # Явно подсказка, что для нового файла нужен /start
+        done_hint = {
+            "ru": "✅ Готово! Чтобы загрузить новый PDF, начни заново командой /start.",
+            "en": "✅ All set! To upload another PDF, please restart with /start.",
+            "es": "✅ ¡Listo! Para enviar otro PDF, reinicia con /start.",
+        }
+        await message.answer(done_hint[lang])
+
     except Exception as e:
         errs = {
             "ru": f"❌ Ошибка при обработке файла: {e}",
@@ -265,7 +293,7 @@ async def handle_pdf(message: Message, state: FSMContext):
     finally:
         # ✅ Авто-удаление файла после обработки, если STORE_UPLOADS = False
         try:
-            if not STORE_UPLOADS and file_path.exists():
+            if 'file_path' in locals() and not STORE_UPLOADS and file_path.exists():
                 file_path.unlink()
         except Exception:
             pass

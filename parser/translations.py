@@ -90,6 +90,16 @@ translations = {
         "СвТ3": "СвТ3",
         "КФК": "КФК",
         "КФК-МВ": "КФК-МВ",
+
+        # Антитела
+        "IgA": "Иммуноглобулин A (IgA)",
+        "IgG": "Иммуноглобулин G (IgG)",
+        "IgM": "Иммуноглобулин M (IgM)",
+        "IgE": "Иммуноглобулин E (IgE)",
+        "IgD": "Иммуноглобулин D (IgD)",
+        "anti-TPO": "Антитела к тиреопероксидазе (anti-TPO)",
+        "anti-TG": "Антитела к тиреоглобулину (anti-TG)",
+        "ANA": "Антинуклеарные антитела (ANA)",
     },
 
     "en": {
@@ -181,6 +191,16 @@ translations = {
         "СвТ3": "Free T3",
         "КФК": "CK",
         "КФК-МВ": "CK-MB",
+
+        # Antibodies
+        "IgA": "Immunoglobulin A (IgA)",
+        "IgG": "Immunoglobulin G (IgG)",
+        "IgM": "Immunoglobulin M (IgM)",
+        "IgE": "Immunoglobulin E (IgE)",
+        "IgD": "Immunoglobulin D (IgD)",
+        "anti-TPO": "Anti-thyroid peroxidase antibodies (anti-TPO)",
+        "anti-TG": "Anti-thyroglobulin antibodies (anti-TG)",
+        "ANA": "Antinuclear antibodies (ANA)",
     },
 
     "es": {
@@ -272,5 +292,15 @@ translations = {
         "СвТ3": "T3 libre",
         "КФК": "CK",
         "КФК-МВ": "CK-MB",
+
+        # Tiroidea
+        "IgA": "Inmunoglobulina A (IgA)",
+        "IgG": "Inmunoglobulina G (IgG)",
+        "IgM": "Inmunoglobulina M (IgM)",
+        "IgE": "Inmunoglobulina E (IgE)",
+        "IgD": "Inmunoglobulina D (IgD)",
+        "anti-TPO": "Anticuerpos contra la peroxidasa tiroidea (anti-TPO)",
+        "anti-TG": "Anticuerpos contra la tiroglobulina (anti-TG)",
+        "ANA": "Anticuerpos antinucleares (ANA)",
     }
 }

@@ -46,6 +46,12 @@ except Exception:
             if isinstance(raw_val, (int, float)):
                 return float(raw_val)
             s = str(raw_val).strip().replace(",", ".")
+            # Специальный кейс для ANA: если пришло "1:160", вернём 160
+            if name == "ANA" and ":" in s:
+                parts = s.split(":")
+                tail = parts[-1].strip()
+                if tail.isdigit():
+                    return float(tail)
             tmp = "".join(ch for ch in s if (ch.isdigit() or ch in ".-"))
             return float(tmp) if tmp else None
         except Exception:
@@ -82,9 +88,13 @@ CANON_KEYS: List[str] = [
     # Индексы тромбоцитов
     "MPV","PDW","PCT",
 
-    # Дополнительно
+    # Витамины/гормоны щитовидки и др.
     "Витамин D (25-OH)","Витамин B12","Фолиевая кислота","ТСГ","ТТГ","СвТ4","СвТ3",
     "КФК","КФК-МВ",
+
+    # --- Антитела / иммуноглобулины ---
+    "IgA","IgG","IgM","IgE","IgD",
+    "anti-TPO","anti-TG","ANA",
 ]
 
 PERCENT_KEYS = {"Нейтрофилы %","Лимфоциты %","Моноциты %","Эозинофилы %","Базофилы %"}
@@ -122,6 +132,12 @@ SYSTEM_PROMPT = (
     "- Ферритин: ng/mL; CRP: mg/L; eGFR: mL/min/1.73m2\n"
     "- ТТГ/СвТ4/СвТ3: mIU/L, pmol/L, pmol/L (convert if required)\n"
     "- Витамин D (25-OH): ng/mL (if nmol/L, ×0.4)\n"
+    "- IgG/IgA/IgM: g/L (if mg/dL, ×0.01)\n"
+    "- IgE: IU/mL (if kU/L, the numeric value is the same; if IU/L, ÷1000)\n"
+    "- IgD: g/L (if mg/L, ÷1000)\n"
+    "- anti-TPO / anti-TG: IU/mL (if U/mL treat as IU/mL; if IU/L, ÷1000)\n"
+    "- ANA (titer): if reported like '1:160', return 160; if 'negative', return 0; "
+    "if only 'positive' without numeric titer, return null.\n"
     "Sanity-check: percentages must be 0..100; discard impossible values by using null. "
     "Return ONLY a JSON object with keys EXACTLY from the list. No prose."
 )

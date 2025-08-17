@@ -77,8 +77,50 @@ INDICATORS_MAP = {
     "Моноциты абс.": ["monocytes abs", "моноциты абс", "mon abs"],
     "Эозинофилы абс.": ["eosinophils abs", "эозинофилы абс", "eos abs"],
     "Базофилы абс.": ["basophils abs", "базофилы абс", "baso abs"],
-}
 
+    # --- Антитела / иммуноглобулины ---
+    # Иммуноглобулины (частые варианты записи и локализации)
+    "IgA": [
+        "iga", "immunoglobulin a", "immunoglobulina a",
+        "игa", "иг а", "иммуноглобулин a"
+    ],
+    "IgG": [
+        "igg", "immunoglobulin g", "immunoglobulina g",
+        "игg", "иг г", "иммуноглобулин g"
+    ],
+    "IgM": [
+        "igm", "immunoglobulin m", "immunoglobulina m",
+        "игm", "иг м", "иммуноглобулин m"
+    ],
+    "IgE": [
+        "ige", "immunoglobulin e", "immunoglobulina e",
+        "игe", "иг е", "иммуноглобулин e"
+    ],
+    "IgD": [
+        "igd", "immunoglobulin d", "immunoglobulina d",
+        "игd", "иг д", "иммуноглобулин d"
+    ],
+
+    # Anti-TPO (антитела к тиреопероксидазе)
+    "anti-TPO": [
+        "anti-tpo", "anti tpo", "anti-tpo", "anti–tpo",
+        "антитела к тпо", "антитела к тиреопероксидазе", "ато", "ат к тпо", "ат-тпо",
+        "anti-thyroid peroxidase", "anticuerpos anti tpo", "anticuerpos contra la peroxidasa tiroidea"
+    ],
+
+    # Anti-TG (антитела к тиреоглобулину)
+    "anti-TG": [
+        "anti-tg", "anti tg", "anti-tg", "anti–tg",
+        "антитела к тг", "антитела к тиреоглобулину", "ат к тг", "ат-тг",
+        "anti-thyroglobulin", "anticuerpos anti tg", "anticuerpos contra la tiroglobulina"
+    ],
+
+    # ANA (антинуклеарные антитела)
+    "ANA": [
+        "ana", "anti-nuclear", "antinuclear", "antinucleares",
+        "антинуклеарные антитела", "анти-нуклеарные", "анти нуклеарные"
+    ],
+}
 
 # -----------------------
 # Публичная функция
